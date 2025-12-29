@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy New Year 2026 ✨</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  height: 100vh;
+  overflow: hidden;
+  background: linear-gradient(135deg, #ffd1dc, #ffe6f0, #ffc0cb);
+}
+
+/* Soft moving light */
+body::before {
+  content: "";
+  position: fixed;
+  inset: -50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.25), transparent 60%);
+  animation: lightMove 12s linear infinite;
+}
+
+@keyframes lightMove {
+  0% { transform: translate(-20%, -20%); }
+  50% { transform: translate(20%, 20%); }
+  100% { transform: translate(-20%, -20%); }
+}
+
+/* Tap screen */
+#startScreen {
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 192, 203, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 10;
+}
+
+#startScreen h1 {
+  font-size: 2.5rem;
+  color: #b30059;
+  margin-bottom: 15px;
+}
+
+#startScreen p {
+  font-size: 1.2rem;
+  animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0.4; }
+}
+
+/* Main content */
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 800px;
+  text-align: center;
+  color: #4a0033;
+  opacity: 0;
+  transition: opacity 2s ease;
+}
+
+.container.show {
+  opacity: 1;
+}
+
+h2 {
+  font-size: 2.8rem;
+  margin-bottom: 10px;
+}
+
+h3 {
+  font-size: 1.8rem;
+  margin-bottom: 30px;
+}
+
+.message {
+  margin: 25px 0;
+  font-size: 1.25rem;
+  line-height: 1.8;
+}
+
+/* Particles */
+.particle {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+  from { transform: translateY(100vh); }
+  to { transform: translateY(-10vh); }
+}
+
+/* Balloons */
+.balloon {
+  position: fixed;
+  bottom: -120px;
+  width: 40px;
+  height: 55px;
+  border-radius: 50%;
+  animation: rise 12s linear infinite;
+}
+
+.balloon::after {
+  content: "";
+  position: absolute;
+  bottom: -25px;
+  left: 50%;
+  width: 2px;
+  height: 25px;
+  background: #999;
+}
+
+@keyframes rise {
+  from { transform: translateY(0); }
+  to { transform: translateY(-130vh); }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Music -->
+<audio id="music" loop>
+  <source src="music.mp3" type="audio/mp3">
+</audio>
+
+<!-- Tap screen -->
+<div id="startScreen">
+  <h1>Happy New Year 2026 ✨</h1>
+  <p>Tap to begin</p>
+</div>
+
+<!-- Content -->
+<div class="container" id="content">
+  <h2>Dear V</h2>
+  <h3>Wishing You a Beautiful 2026 🌸</h3>
+
+  <div class="message">
+    A new year feels like a soft beginning,<br>
+    full of hope and quiet possibilities.
+  </div>
+
+  <div class="message">
+    I hope 2026 brings you calm mornings,<br>
+    confidence in your steps,<br>
+    and reasons to smile often.
+  </div>
+
+  <div class="message">
+    Some people leave a gentle impression,<br>
+    without even trying.<br>
+    This wish comes from that space.
+  </div>
+
+  <div class="message">
+    May this year be kind to you,<br>
+    in ways you don’t even expect.
+  </div>
+
+  <div class="message">
+    Happy New Year, V ✨
+  </div>
+</div>
+
+<script>
+const start = document.getElementById("startScreen");
+const content = document.getElementById("content");
+const music = document.getElementById("music");
+
+start.addEventListener("click", () => {
+  start.style.display = "none";
+  content.classList.add("show");
+  music.play();
+
+  // particles
+  setInterval(() => {
+    const p = document.createElement("div");
+    p.className = "particle";
+    p.style.left = Math.random() * 100 + "vw";
+    p.style.animationDuration = (6 + Math.random() * 6) + "s";
+    document.body.appendChild(p);
+    setTimeout(() => p.remove(), 12000);
+  }, 200);
+
+  // balloons
+  setInterval(() => {
+    const b = document.createElement("div");
+    b.className = "balloon";
+    b.style.left = Math.random() * 100 + "vw";
+    b.style.background = `hsl(${330 + Math.random()*20},80%,75%)`;
+    document.body.appendChild(b);
+    setTimeout(() => b.remove(), 15000);
+  }, 800);
+});
+</script>
+
+</body>
+</html>
